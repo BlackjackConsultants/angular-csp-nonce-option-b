@@ -8,5 +8,6 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
-  name: string = 'jorge';
+  firstName: string = 'jorge';
+  lastName: string = 'perez';
 }
