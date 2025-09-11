@@ -1,10 +1,10 @@
 {
-  "name": "angular-csp-nonce",
+  "name": "angular-csp-nonce-option-b",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "node index.js && ng serve --watch",
-    "build": "ng build",
+    "build": "node index.js && ng build",
     "watch": "node index.js && ng build --watch --configuration development",
     "test": "ng test"
   },

@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "angular-csp-nonce": {
+    "angular-csp-nonce-option-b": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -64,10 +64,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-csp-nonce:build:production"
+              "buildTarget": "angular-csp-nonce-option-b:build:production"
             },
             "development": {
-              "buildTarget": "angular-csp-nonce:build:development"
+              "buildTarget": "angular-csp-nonce-option-b:build:development"
             }
           },
           "defaultConfiguration": "development"

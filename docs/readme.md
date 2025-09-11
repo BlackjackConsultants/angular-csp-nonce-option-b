@@ -32,7 +32,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 
 const app = express();
-const distDir = path.join(__dirname, 'dist', 'angular-csp-nonce', 'browser');
+const distDir = path.join(__dirname, 'dist', 'angular-csp-nonce-option-b', 'browser');
 
 // Serve static files without auto-index so we can inject nonce on "*"
 app.use(express.static(distDir, { index: false }));
