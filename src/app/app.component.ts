@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { DynamicStyleService } from './dynamic-style';
+import { DynamicStyleService } from './dynamic-style.service';
 import { ContactComponent } from './contact/contact.component'; // <-- adjust path if needed
 
 @Component({
