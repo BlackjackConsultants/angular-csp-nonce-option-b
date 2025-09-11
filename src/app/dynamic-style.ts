@@ -15,6 +15,7 @@ export class DynamicStyleService {
         console.warn('CSP_NONCE not provided; dynamic <style> will be blocked by strict CSP.');
       }
       this.styleEl.id = 'dynamic-styles';
+      console.debug(`%c:dynamic-style:ensure:`, `background-color: blue; color: white;`, this.styleEl, document.head);
       document.head.appendChild(this.styleEl);
     }
     return this.styleEl.sheet as CSSStyleSheet;

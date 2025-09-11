@@ -16,6 +16,7 @@ bootstrapApplication(AppComponent, {
         if (!nonce) {
           console.warn('CSP nonce not found in <meta name="csp-nonce">; check your server injection.');
         }
+        console.debug(`%c:bootstrapApplication: ${nonce}`, `background-color: red; color: white; font-weight: bold;`, nonce);
         return nonce;
       },
     },
