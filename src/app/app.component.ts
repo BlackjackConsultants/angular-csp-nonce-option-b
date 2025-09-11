@@ -1,14 +1,17 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { DynamicStyleService } from './dynamic-style';
+import { ContactComponent } from './contact/contact.component'; // <-- adjust path if needed
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [ContactComponent],
   template: `
     <main class="shell">
       <h1>Angular CSP Nonce — Option B</h1>
       <p class="badge">If this badge is styled, the nonce worked.</p>
       <p class="from-service">This box is styled by a nonce-tagged &lt;style&gt; created at runtime.</p>
+      <app-contact></app-contact>
     </main>
   `,
   styles: [`
