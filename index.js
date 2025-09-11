@@ -17,7 +17,7 @@ app.use((req, res) => {
   // Tight CSP: Angular runtime styles are allowed via this nonce
   const csp = [
     "default-src 'self'",
-    "script-src 'self'",                  // no inline scripts; add 'nonce-…' here only if you really need them
+    `script-src 'self' 'nonce-${nonce}'`,  // no inline scripts; add 'nonce-…' here only if you really need them
     `style-src 'self' 'nonce-${nonce}'`,  // Angular + our DynamicStyleService styles
     "img-src 'self' data:",
     "font-src 'self'",

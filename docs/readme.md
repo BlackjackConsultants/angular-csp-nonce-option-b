@@ -1,4 +1,5 @@
 # Example Readme
+Option B from chatgpt answer which does not add nonce in server side.   The nonce is added dynamically later on the client.
 
 ## Running the application
 1. to build, from the root folder, type ```npm run watch```.
@@ -6,6 +7,8 @@
 3. Notice in the console that you see the url that the server is serving. ```http://localhost:4000```
 
 ## References
+> Note: This is option be from the answer chatgpt gave below. this option allows the nonce to be added in client as opposed to server.
+> 
 The following chatgpt reply helped build this example
 ```https://chatgpt.com/share/68c1bec5-173c-8003-865c-c4d3956a6c8c```
 Go to the second prompt.   This is the part that was used by this example.  Make sure though that you install version 4 of express not version 5 or it will not work.
