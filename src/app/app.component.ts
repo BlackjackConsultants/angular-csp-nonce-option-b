@@ -10,7 +10,7 @@ import { ContactComponent } from './contact/contact.component'; // <-- adjust pa
     <main class="shell">
       <h1>Angular CSP Nonce — Option B</h1>
       <p class="badge">If this badge is styled, the nonce worked.</p>
-      <p class="from-service">This box is styled by a nonce-tagged &lt;style&gt; created at runtime.</p>
+      <p class="from-service1">This box is styled by a nonce-tagged &lt;style&gt; created at runtime.</p>
       <app-contact></app-contact>
     </main>
   `,
