@@ -13,8 +13,20 @@ export class DynamicStyleService {
    * Ensures the dynamic <style> element exists and returns its CSSStyleSheet
    * @returns the CSSStyleSheet object of the dynamically created <style> element
    */
-  private ensure(): CSSStyleSheet {
+  private ensure(id?: string): CSSStyleSheet {
+    if (id == undefined) {
+      console.debug(`%c:ensure: id=${id}`, `background-color: violet; color: white;`, this.styleEl, id);
+      id = `${DynamicStyleService.STYLE_ID_PREFIX}-${DynamicStyleService._counter}`;
+      this.styleEl = undefined; // force new <style> creation
+    }
+    else {
+      id = id.startsWith(`${DynamicStyleService.STYLE_ID_PREFIX}-`) ? id : `${DynamicStyleService.STYLE_ID_PREFIX}-${id}`;
+      console.debug(`%c:ensure: id=${id}`, `background-color: black; color: white;`, this.styleEl, id);
+      const el = document.getElementById(id) as HTMLStyleElement;
+      this.styleEl = el || undefined
+    }
     if (!this.styleEl) {
+      // create style element
       this.styleEl = document.createElement('style');
       if (this.nonce) {
         this.styleEl.setAttribute('nonce', this.nonce);
@@ -33,8 +45,8 @@ export class DynamicStyleService {
    * @param selector The CSS selector
    * @param declarations The CSS declarations
    */
-  setRule(selector: string, declarations: string, closeStyle = false) {
-    const sheet = this.ensure();
+  setRule(selector: string, declarations: string, id?: string) {
+    const sheet = this.ensure(id);
     const rule = `${selector}{${declarations}}`;
     try {
       sheet.insertRule(rule, sheet.cssRules.length);
@@ -49,17 +61,14 @@ export class DynamicStyleService {
       }
       console.debug(`%c:dynamic-style:setRule:insertRule:`, `background-color: green; color: white;`, this.styleEl, document.head);
     }
-    if (closeStyle) {
-      this.styleEl = undefined; // reset to allow new <style> creation next time
-    }
   }
 
   /**
    * Adds multiple CSS rules
    * @param rules A string containing multiple CSS rules
    */
-  setRules(rules: string, closeStyle = false) {
-    const sheet = this.ensure();
+  setRules(rules: string, id?: string) {
+    const sheet = this.ensure(id);
     const text = rules.trim();
     // Append the whole rules string as a single text node (no parsing)
     if (this.styleEl) {
@@ -72,9 +81,6 @@ export class DynamicStyleService {
         this.styleEl.textContent = (this.styleEl.textContent || '') + text;
         console.debug(`%c:dynamic-style:setRules:appendText:failed:`, `background-color: purple; color: white;`, this.styleEl, err);
       }
-    }
-    if (closeStyle) {
-      this.styleEl = undefined; // reset to allow new <style> creation next time
     }
   }
 }
