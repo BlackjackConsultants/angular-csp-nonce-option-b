@@ -33,7 +33,7 @@ export class DynamicStyleService {
    * @param selector The CSS selector
    * @param declarations The CSS declarations
    */
-  setRule(selector: string, declarations: string) {
+  setRule(selector: string, declarations: string, closeStyle = false) {
     const sheet = this.ensure();
     const rule = `${selector}{${declarations}}`;
     try {
@@ -49,13 +49,16 @@ export class DynamicStyleService {
       }
       console.debug(`%c:dynamic-style:setRule:insertRule:`, `background-color: green; color: white;`, this.styleEl, document.head);
     }
+    if (closeStyle) {
+      this.styleEl = undefined; // reset to allow new <style> creation next time
+    }
   }
 
   /**
    * Adds multiple CSS rules
    * @param rules A string containing multiple CSS rules
    */
-  setRules(rules: string) {
+  setRules(rules: string, closeStyle = false) {
     const sheet = this.ensure();
     const text = rules.trim();
     // Append the whole rules string as a single text node (no parsing)
@@ -68,6 +71,9 @@ export class DynamicStyleService {
         this.styleEl.textContent = (this.styleEl.textContent || '') + text;
         console.debug(`%c:dynamic-style:setRules:appendText:failed:`, `background-color: purple; color: white;`, this.styleEl, err);
       }
+    }
+    if (closeStyle) {
+      this.styleEl = undefined; // reset to allow new <style> creation next time
     }
   }
 }
