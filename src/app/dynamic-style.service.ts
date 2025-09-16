@@ -89,15 +89,6 @@ export class DynamicStyleService {
    * @param textContent The full text content to insert into a new <style> element
    */
   insertNonce(element: string): string {
-    // If there's no nonce available or input is not a string, return as-is
-    if (!element || typeof element !== 'string') {
-      return element;
-    }
-    if (!this.nonce) {
-      console.warn('CSP_NONCE not provided; returning element unchanged.');
-      return element;
-    }
-
     // Match the opening <style ...> tag
     const openTagRe = /(<style\b)([^>]*)(>)/i;
     const match = element.match(openTagRe);
