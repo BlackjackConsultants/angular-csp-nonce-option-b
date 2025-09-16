@@ -83,4 +83,41 @@ export class DynamicStyleService {
       }
     }
   }
+
+  /**
+   * inserts nonce attribute to the style element
+   * @param textContent The full text content to insert into a new <style> element
+   */
+  insertNonce(element: string): string {
+    // If there's no nonce available or input is not a string, return as-is
+    if (!element || typeof element !== 'string') {
+      return element;
+    }
+    if (!this.nonce) {
+      console.warn('CSP_NONCE not provided; returning element unchanged.');
+      return element;
+    }
+
+    // Match the opening <style ...> tag
+    const openTagRe = /(<style\b)([^>]*)(>)/i;
+    const match = element.match(openTagRe);
+    if (!match) {
+      // Not a <style> element string; just return it unchanged
+      return element;
+    }
+
+    const nonceAttrRe = /\bnonce\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/i;
+    const replaced = element.replace(openTagRe, (_m, start: string, attrs: string, end: string) => {
+      if (nonceAttrRe.test(attrs)) {
+        // Replace existing nonce value
+        attrs = attrs.replace(nonceAttrRe, `nonce="${this.nonce}"`);
+      } else {
+        // Insert nonce attribute preserving existing spacing
+        attrs = `${attrs} nonce="${this.nonce}"`;
+      }
+      return `${start}${attrs}${end}`;
+    });
+
+    return replaced;
+  }
 }

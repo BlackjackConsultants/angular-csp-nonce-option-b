@@ -30,5 +30,8 @@ export class AppComponent implements OnInit {
     this.dyn.setRules('.from-service3:hover { background-color:lightgreen; color:black; } .badge:hover { background-color:white; }', "2");
     this.dyn.setRules('.from-service4:hover { background-color:black; color:white; } .badge:hover { background-color:white; }', "2");
     this.dyn.setRules('.from-service5:hover { background-color:red; color:white; } .badge:hover { background-color:white; }', "4");
+    // add nonce to element
+    const styledElement = this.dyn.insertNonce('<style>.from-service1 { color: blue; }</style>');
+    console.debug(`%c:styledElement`, `background-color: brown; color: white;`, styledElement);
   }
 }
