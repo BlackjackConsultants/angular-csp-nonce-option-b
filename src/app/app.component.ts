@@ -24,9 +24,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // Demonstrate adding your own runtime <style> that carries the same nonce
-    this.dyn.setRule('.from-service', 'margin-top:12px; padding:10px; border-radius:8px; background-color:orange;color:black;', true);
-    this.dyn.setRules('.from-service1:hover { background-color:yellow; color:black; } .badge:hover { background-color:#004ba0; }', true);
-    this.dyn.setRules('.from-service2:hover { background-color:lightgreen; color:black; } .badge:hover { background-color:white; }', false);
-    this.dyn.setRules('.from-service3:hover { background-color:black; color:white; } .badge:hover { background-color:white; }', false);
+    this.dyn.setRule('.from-service1', 'margin-top:12px; padding:10px; border-radius:8px; background-color:orange;color:black;', true);
+    this.dyn.setRules('.from-service2:hover { background-color:yellow; color:black; } .badge:hover { background-color:#004ba0; }', true);
+    this.dyn.setRules('.from-service3:hover { background-color:lightgreen; color:black; } .badge:hover { background-color:white; }', false);
+    this.dyn.setRules('.from-service4:hover { background-color:black; color:white; } .badge:hover { background-color:white; }', false);
   }
 }

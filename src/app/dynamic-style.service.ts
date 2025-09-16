@@ -64,6 +64,7 @@ export class DynamicStyleService {
     // Append the whole rules string as a single text node (no parsing)
     if (this.styleEl) {
       try {
+        this.styleEl.textContent = ''; // clear existing content to avoid duplicates
         this.styleEl.appendChild(document.createTextNode(text));
         console.debug(`%c:dynamic-style:setRules:appendText:`, `background-color: red; color: white;`, this.styleEl, text);
       } catch (err) {
