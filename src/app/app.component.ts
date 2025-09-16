@@ -25,5 +25,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // Demonstrate adding your own runtime <style> that carries the same nonce
     this.dyn.setRule('.from-service', 'margin-top:12px; padding:10px; border-radius:8px; background-color:orange;color:black;');
+    this.dyn.setRules('.from-service:hover { background-color:yellow; color:black; } .badge:hover { background-color:#004ba0; }');
   }
 }

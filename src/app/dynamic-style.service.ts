@@ -20,6 +20,11 @@ export class DynamicStyleService {
     return this.styleEl.sheet as CSSStyleSheet;
   }
 
+  /**
+   * Adds a single CSS rule
+   * @param selector The CSS selector
+   * @param declarations The CSS declarations
+   */
   setRule(selector: string, declarations: string) {
     const sheet = this.ensure();
     const rule = `${selector}{${declarations}}`;
@@ -28,13 +33,33 @@ export class DynamicStyleService {
       if (this.styleEl) {
         this.styleEl.appendChild(document.createTextNode(rule));
       }
-      console.debug(`%c:dynamic-style:setRule:insertRule:`, `background-color: blue; color: white;`, this.styleEl, document.head);
+      console.debug(`%c:dynamic-style:setRule:insertRule:`, `background-color: blue; color: white;`, this.styleEl, selector, declarations);
     } catch (err) {
       // Fallback: if insertRule fails (e.g., due to CSP/CSSOM quirks or invalid CSS), append text directly
       if (this.styleEl) {
         this.styleEl.appendChild(document.createTextNode(rule));
       }
       console.debug(`%c:dynamic-style:setRule:insertRule:`, `background-color: green; color: white;`, this.styleEl, document.head);
+    }
+  }
+
+  /**
+   * Adds multiple CSS rules
+   * @param rules A string containing multiple CSS rules
+   */
+  setRules(rules: string) {
+    const sheet = this.ensure();
+    const text = rules.trim();
+    // Append the whole rules string as a single text node (no parsing)
+    if (this.styleEl) {
+      try {
+        this.styleEl.appendChild(document.createTextNode(text));
+        console.debug(`%c:dynamic-style:setRules:appendText:`, `background-color: red; color: white;`, this.styleEl, text);
+      } catch (err) {
+        // fallback to textContent concat
+        this.styleEl.textContent = (this.styleEl.textContent || '') + text;
+        console.debug(`%c:dynamic-style:setRules:appendText:failed:`, `background-color: purple; color: white;`, this.styleEl, err);
+      }
     }
   }
 }
