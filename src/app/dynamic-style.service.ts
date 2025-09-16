@@ -4,8 +4,15 @@ import { Injectable, Inject, CSP_NONCE } from '@angular/core';
 export class DynamicStyleService {
   private styleEl?: HTMLStyleElement;
 
+  private static readonly STYLE_ID_PREFIX = 'dynamic-styles';
+  private static _counter = 0;
+
   constructor(@Inject(CSP_NONCE) private nonce: string | null) { }
 
+  /**
+   * Ensures the dynamic <style> element exists and returns its CSSStyleSheet
+   * @returns the CSSStyleSheet object of the dynamically created <style> element
+   */
   private ensure(): CSSStyleSheet {
     if (!this.styleEl) {
       this.styleEl = document.createElement('style');
@@ -14,7 +21,8 @@ export class DynamicStyleService {
       } else {
         console.warn('CSP_NONCE not provided; dynamic <style> will be blocked by strict CSP.');
       }
-      this.styleEl.id = 'dynamic-styles';
+      // generate a unique id with 'dynamic-styles' prefix
+      this.styleEl.id = `dynamic-styles-${++DynamicStyleService._counter}`;
       document.head.appendChild(this.styleEl);
     }
     return this.styleEl.sheet as CSSStyleSheet;
